@@ -1,0 +1,21 @@
+version: "3.3"
+
+services:
+  dotnet:
+    image: microsoft/dotnet:2.1-sdk
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    working_dir: /app
+    volumes:
+      - ./:/app
+    entrypoint:
+      - dotnet
+      - run
+  mssql:
+    image: microsoft/mssql-server-linux:2017-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Passw0rd123!
+    volumes:
+      - ./.docker/mssql/data:/var/opt/mssql
